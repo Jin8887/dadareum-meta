@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI 시대 팀장 리더십 | 다다름</title>
+  <meta name="description" content="판단력, 자기수용, 다양성 수용. AI 시대를 헤쳐나갈 리더십의 근간을 다다름이 경험으로 설계합니다.">
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:#0d1f3c;--blue:#1a5fd6;--cyan:#00c2d1;--gold:#c8922a;--gold-lt:#e8b455;
+      --white:#fff;--gray-bg:#f5f7fa;--gray:#6b7a99;--text:#1a1f2e;--border:#d9e1ef;
+      --font:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font);color:var(--text);background:var(--white);line-height:1.8;overflow-x:hidden}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:64px;background:rgba(13,31,60,.97);backdrop-filter:blur(8px);border-bottom:1px solid rgba(0,194,209,.15)}
+    .nav-logo img{height:34px;width:auto;display:block}
+    .nav-links{display:flex;gap:2rem;list-style:none}
+    .nav-links a{font-family:var(--font);color:rgba(255,255,255,.72);text-decoration:none;font-size:.85rem;font-weight:500;transition:color .2s}
+    .nav-links a:hover{color:var(--cyan)}
+    .nav-cta{background:var(--gold)!important;color:var(--white)!important;padding:.4rem 1.1rem;border-radius:4px;font-weight:700!important}
+    .nav-cta:hover{background:var(--gold-lt)!important}
+
+    /* HERO */
+    #hero{min-height:100vh;background:var(--navy);display:flex;align-items:center;position:relative;overflow:hidden;padding:120px 5% 80px}
+    .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 80% 50%,rgba(0,194,209,.08),transparent 70%),radial-gradient(ellipse 40% 60% at 20% 80%,rgba(26,95,214,.12),transparent 70%)}
+    .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,194,209,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,194,209,.04) 1px,transparent 1px);background-size:60px 60px}
+    .hero-inner{position:relative;max-width:800px}
+    .hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(0,194,209,.12);border:1px solid rgba(0,194,209,.3);color:var(--cyan);font-family:var(--font);font-size:.75rem;font-weight:700;letter-spacing:.12em;padding:.35rem 1rem;border-radius:50px;margin-bottom:2rem;text-transform:uppercase}
+    .hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+    .hero-title{font-family:var(--font);font-size:clamp(2.1rem,4.5vw,3.6rem);font-weight:900;color:var(--white);line-height:1.22;margin-bottom:1.5rem;letter-spacing:-.02em}
+    .gold-line{position:relative;display:inline-block}
+    .gold-line::after{content:'';position:absolute;bottom:2px;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),var(--gold-lt));border-radius:2px}
+    .hero-sub{font-family:var(--font);font-size:1.05rem;color:rgba(255,255,255,.7);line-height:1.9;margin-bottom:2rem;max-width:580px}
+    .hero-sub strong{color:var(--white);font-weight:600}
+    .hero-tags{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:2.5rem}
+    .tag{font-family:var(--font);background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.82);font-size:.8rem;padding:.28rem .85rem;border-radius:50px}
+    .hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+    .btn-gold{font-family:var(--font);background:var(--gold);color:var(--white);padding:.9rem 2.2rem;border-radius:6px;font-size:.95rem;font-weight:700;border:none;cursor:pointer;transition:all .25s;text-decoration:none;display:inline-block}
+    .btn-gold:hover{background:var(--gold-lt);transform:translateY(-2px);box-shadow:0 8px 24px rgba(200,146,42,.35)}
+    .btn-line{font-family:var(--font);background:transparent;color:var(--white);padding:.9rem 2.2rem;border-radius:6px;font-size:.95rem;font-weight:500;border:1px solid rgba(255,255,255,.3);cursor:pointer;transition:all .25s;text-decoration:none;display:inline-block}
+    .btn-line:hover{border-color:var(--cyan);color:var(--cyan)}
+    .hero-deco{position:absolute;right:5%;top:50%;transform:translateY(-50%);width:360px;height:360px;display:flex;align-items:center;justify-content:center}
+    .deco-ring{position:absolute;border-radius:50%;border:1px solid rgba(0,194,209,.14)}
+    .deco-ring:nth-child(1){width:360px;height:360px;animation:spin 30s linear infinite}
+    .deco-ring:nth-child(2){width:260px;height:260px;animation:spin 20s linear infinite reverse;border-color:rgba(200,146,42,.14)}
+    .deco-ring:nth-child(3){width:160px;height:160px;animation:spin 14s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .deco-core{width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,rgba(0,194,209,.18),rgba(26,95,214,.18));border:2px solid rgba(0,194,209,.4);display:flex;align-items:center;justify-content:center;font-family:var(--font);font-size:.72rem;font-weight:700;color:var(--cyan);text-align:center;line-height:1.5;position:relative;z-index:1}
+
+    /* SECTION COMMONS */
+    section{padding:96px 5%}
+    .container{max-width:1080px;margin:0 auto}
+    .sec-label{font-family:var(--font);font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
+    .sec-title{font-family:var(--font);font-size:clamp(1.6rem,3vw,2.3rem);font-weight:800;color:var(--navy);line-height:1.35;margin-bottom:.9rem;letter-spacing:-.01em}
+    .sec-sub{font-family:var(--font);font-size:1rem;color:var(--gray);line-height:1.9;max-width:580px}
+
+    /* WHY */
+    #why{background:var(--gray-bg)}
+    .why-hd{margin-bottom:3.2rem}
+    .why-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.4rem;margin-bottom:2.4rem}
+    .why-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:2rem;position:relative;overflow:hidden;transition:box-shadow .3s,transform .3s}
+    .why-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(13,31,60,.09)}
+    .why-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--cyan))}
+    .why-num{position:absolute;top:1.4rem;right:1.6rem;font-family:var(--font);font-size:2.2rem;font-weight:900;color:rgba(13,31,60,.06);line-height:1}
+    .why-q{font-family:var(--font);font-size:1rem;font-weight:700;color:var(--navy);line-height:1.55;margin-bottom:.9rem;padding-bottom:.9rem;border-bottom:1px solid var(--border)}
+    .why-a{font-family:var(--font);font-size:.88rem;color:var(--gray);line-height:1.75}
+    .why-bar{background:var(--navy);border-radius:12px;padding:1.8rem 2.2rem;display:flex;align-items:center;gap:1.4rem}
+    .why-bar-icon{width:44px;height:44px;border-radius:50%;background:rgba(0,194,209,.14);border:1px solid rgba(0,194,209,.28);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+    .why-bar p{font-family:var(--font);font-size:.96rem;color:rgba(255,255,255,.85);line-height:1.75}
+    .why-bar strong{color:var(--cyan)}
+
+    /* META */
+    #meta{background:var(--navy);position:relative;overflow:hidden}
+    #meta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 70% at 50% 0%,rgba(0,194,209,.06),transparent 70%)}
+    .meta-hd{text-align:center;margin-bottom:3.6rem;position:relative}
+    .meta-hd .sec-title{color:var(--white)}
+    .meta-intro{font-family:var(--font);font-size:1rem;color:rgba(255,255,255,.6);line-height:1.9;max-width:600px;margin:1.4rem auto 0;text-align:center}
+    .meta-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.4rem}
+    .meta-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:2.4rem;transition:all .3s;position:relative;overflow:hidden}
+    .meta-card:hover{background:rgba(255,255,255,.07);border-color:rgba(0,194,209,.3);transform:translateY(-4px)}
+    .meta-no{font-family:var(--font);font-size:.7rem;font-weight:700;letter-spacing:.14em;color:var(--cyan);margin-bottom:.9rem}
+    .meta-name{font-family:var(--font);font-size:1.25rem;font-weight:800;color:var(--white);margin-bottom:.7rem}
+    .meta-quote{font-family:var(--font);font-size:.87rem;color:rgba(0,194,209,.85);line-height:1.65;font-style:italic;margin-bottom:1.2rem;padding-bottom:1.2rem;border-bottom:1px solid rgba(255,255,255,.08)}
+    .meta-desc{font-family:var(--font);font-size:.86rem;color:rgba(255,255,255,.55);line-height:1.85}
+    .meta-icon{position:absolute;bottom:1.4rem;right:1.6rem;font-size:1.8rem;opacity:.14}
+
+    /* PROGRAM */
+    #program{background:var(--white)}
+    .prog-hd{margin-bottom:3rem}
+    .steps-wrap{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:2.2rem}
+    .step{background:var(--white);padding:1.9rem 2.1rem;display:flex;gap:1.2rem;align-items:flex-start;transition:background .2s}
+    .step:hover{background:var(--gray-bg)}
+    .step-n{width:34px;height:34px;border-radius:50%;background:var(--navy);color:var(--white);font-family:var(--font);font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .step-outro .step-n{background:linear-gradient(135deg,var(--gold),var(--gold-lt))}
+    .step-tag{font-family:var(--font);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:.25rem}
+    .step-title{font-family:var(--font);font-size:.98rem;font-weight:700;color:var(--navy);margin-bottom:.35rem}
+    .step-desc{font-family:var(--font);font-size:.84rem;color:var(--gray);line-height:1.7}
+    .badges{display:flex;flex-wrap:wrap;gap:.7rem}
+    .badge{font-family:var(--font);display:flex;align-items:center;gap:.45rem;background:var(--gray-bg);border:1px solid var(--border);border-radius:50px;padding:.45rem 1.1rem;font-size:.82rem;color:var(--navy);font-weight:500}
+    .badge::before{content:'✔';color:var(--gold);font-size:.72rem}
+
+    /* PHILOSOPHY */
+    #philosophy{background:var(--gray-bg)}
+    .phil-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+    .phil-lead{font-family:var(--font);font-size:1rem;color:var(--gray);line-height:1.9;margin-bottom:2rem}
+    .phil-steps{display:flex;flex-direction:column}
+    .phil-step{display:flex;gap:1.4rem;position:relative}
+    .phil-step:not(:last-child)::after{content:'';position:absolute;left:17px;top:42px;bottom:-18px;width:2px;background:linear-gradient(to bottom,var(--cyan),transparent)}
+    .phil-dot-wrap{display:flex;flex-direction:column;align-items:center;flex-shrink:0}
+    .phil-dot{width:34px;height:34px;border-radius:50%;background:var(--navy);border:2px solid var(--cyan);display:flex;align-items:center;justify-content:center;color:var(--cyan);font-family:var(--font);font-weight:700;font-size:.78rem}
+    .phil-body{padding-bottom:2.4rem}
+    .phil-lbl{font-family:var(--font);font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:.22rem}
+    .phil-ttl{font-family:var(--font);font-size:.97rem;font-weight:700;color:var(--navy);margin-bottom:.35rem}
+    .phil-desc{font-family:var(--font);font-size:.84rem;color:var(--gray);line-height:1.75}
+    .phil-box{background:var(--navy);border-radius:20px;padding:3rem;position:relative;overflow:hidden}
+    .phil-box::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:rgba(0,194,209,.06)}
+    .phil-quote{font-family:var(--font);font-size:1.3rem;font-weight:700;color:var(--white);line-height:1.65;margin-bottom:2rem;position:relative}
+    .phil-quote::before{content:'"';font-size:3.8rem;color:rgba(0,194,209,.18);line-height:1;display:block;margin-bottom:-.4rem;font-family:serif}
+    .phil-attr{display:flex;align-items:center;gap:.7rem}
+    .phil-line{width:30px;height:2px;background:var(--gold)}
+    .phil-attr span{font-family:var(--font);font-size:.82rem;color:rgba(255,255,255,.5);font-weight:500}
+
+    /* CTA */
+    #contact{background:var(--navy);text-align:center;position:relative;overflow:hidden}
+    #contact::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 100%,rgba(0,194,209,.07),transparent 70%)}
+    .cta-inner{position:relative;max-width:680px;margin:0 auto}
+    .cta-title{font-family:var(--font);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;color:var(--white);line-height:1.45;margin-bottom:1rem;letter-spacing:-.01em}
+    .cta-sub{font-family:var(--font);font-size:.95rem;color:rgba(255,255,255,.58);line-height:1.85;margin-bottom:2.4rem}
+    .cta-info{margin-top:1.8rem;font-family:var(--font);font-size:.83rem;color:rgba(255,255,255,.38)}
+    .cta-info a{color:rgba(255,255,255,.52);text-decoration:none}
+
+    /* FOOTER */
+    footer{background:#060d1c;padding:2.2rem 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+    .foot-logo img{height:28px;width:auto;opacity:.6}
+    .foot-copy{font-family:var(--font);font-size:.76rem;color:rgba(255,255,255,.28)}
+
+    /* MODAL */
+    .modal-ov{position:fixed;inset:0;background:rgba(6,13,28,.86);z-index:200;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(4px)}
+    .modal-ov.on{opacity:1;pointer-events:all}
+    .modal{background:var(--white);border-radius:16px;padding:2.8rem;width:90%;max-width:440px;position:relative;transform:translateY(20px);transition:transform .3s}
+    .modal-ov.on .modal{transform:translateY(0)}
+    .modal-x{position:absolute;top:1.2rem;right:1.4rem;background:none;border:none;font-size:1.3rem;color:var(--gray);cursor:pointer;font-family:var(--font)}
+    .modal-title{font-family:var(--font);font-size:1.35rem;font-weight:800;color:var(--navy);margin-bottom:.4rem}
+    .modal-desc{font-family:var(--font);font-size:.84rem;color:var(--gray);line-height:1.7;margin-bottom:1.8rem}
+    .fg{margin-bottom:1.2rem}
+    .fg label{display:block;font-family:var(--font);font-size:.82rem;font-weight:700;color:var(--navy);margin-bottom:.38rem}
+    .fg input{width:100%;padding:.78rem 1rem;border:1.5px solid var(--border);border-radius:8px;font-family:var(--font);font-size:.9rem;color:var(--text);outline:none;transition:border-color .2s}
+    .fg input:focus{border-color:var(--blue)}
+    .fg input::placeholder{color:#b0bac9}
+    .btn-submit{width:100%;background:var(--gold);color:var(--white);border:none;border-radius:8px;padding:.95rem;font-family:var(--font);font-size:1rem;font-weight:700;cursor:pointer;margin-top:.4rem;transition:background .2s}
+    .btn-submit:hover{background:var(--gold-lt)}
+
+    /* SCROLL REVEAL */
+    .rv{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+    .rv.on{opacity:1;transform:none}
+
+    /* RESPONSIVE */
+    @media(max-width:900px){.hero-deco{display:none}.phil-grid{grid-template-columns:1fr}.nav-links{display:none}}
+    @media(max-width:600px){section{padding:64px 5%}.why-cards,.meta-cards,.steps-wrap{grid-template-columns:1fr}.why-bar{flex-direction:column}}
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#"><img src="data:image/png;base64,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" alt="다다름 로고" /></a>
+  <ul class="nav-links">
+    <li><a href="#why">문제 제기</a></li>
+    <li><a href="#meta">메타역량</a></li>
+    <li><a href="#program">과정 구성</a></li>
+    <li><a href="#philosophy">교육 철학</a></li>
+    <li><a href="#contact" class="nav-cta">도입 문의</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">다다름 팀장 리더십 프로그램</div>
+    <h1 class="hero-title">AI 시대의 생존,<br>리더부터 <span class="gold-line">달라져야</span> 합니다</h1>
+    <p class="hero-sub"><strong>판단력, 자기수용, 다양성 수용.</strong><br>AI 시대를 헤쳐나갈 리더십의 근간,<br>다다름이 경험으로 설계합니다.</p>
+    <div class="hero-tags">
+      <span class="tag">메타역량</span><span class="tag">일터학습 민첩성</span>
+      <span class="tag">메타인지</span><span class="tag">다양성 추구</span><span class="tag">경험 기반 설계</span>
+    </div>
+    <div class="hero-btns">
+      <button class="btn-gold" onclick="openModal()">도입 문의하기</button>
+      <a href="#program" class="btn-line">과정 살펴보기</a>
+    </div>
+  </div>
+  <div class="hero-deco">
+    <div class="deco-ring"></div><div class="deco-ring"></div><div class="deco-ring"></div>
+    <div class="deco-core">리더십의<br>근간</div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="container">
+    <div class="why-hd rv">
+      <p class="sec-label">Why</p>
+      <h2 class="sec-title">AI 시대, 팀장에게<br>무슨 일이 일어나고 있습니까?</h2>
+      <p class="sec-sub">AI 도구를 활용한 넘쳐나는 정보와 자료.<br>그런데 왜 여전히 성과가 나지 않을까요?<br>바로 이를 활용하고 이끌어 갈 팀장의 리더십이 그대로이기 때문입니다.</p>
+    </div>
+    <div class="why-cards">
+      <div class="why-card rv"><span class="why-num">01</span><div class="why-q">"승진은 했지만<br>역할은 달라지지 않았습니다"</div><p class="why-a">팀원일 때의 방식으로 팀을 이끌려 하고 있지는 않습니까?</p></div>
+      <div class="why-card rv"><span class="why-num">02</span><div class="why-q">"AI를 활용한 넘치는 정보와 자료,<br>하지만 판단은 여전히 어렵습니다"</div><p class="why-a">도구가 발전할수록 리더의 판단력이 더 중요해집니다.</p></div>
+      <div class="why-card rv"><span class="why-num">03</span><div class="why-q">"구성원은 다양해졌지만<br>소통 방식은 그대로입니다"</div><p class="why-a">다름을 인정하는 것과 다름을 이끄는 것은 다릅니다.</p></div>
+    </div>
+    <div class="why-bar rv">
+      <div class="why-bar-icon">💡</div>
+      <p>이것은 의지의 문제가 아닙니다.<br><strong>리더십의 근간을 다시 세울 기회가 필요합니다.</strong></p>
+    </div>
+  </div>
+</section>
+
+<section id="meta">
+  <div class="container">
+    <div class="meta-hd rv">
+      <p class="sec-label">Meta Competency</p>
+      <h2 class="sec-title">리더십의 근간, 메타역량</h2>
+      <p class="meta-intro">메타역량은 특정 기술이나 지식이 아닙니다.<br>어떤 상황이 와도 스스로 배우고, 판단하고, 적응하게 하는<br>리더십의 가장 깊은 곳에 있는 힘입니다.<br><br>AI가 빠르게 세상을 바꾸는 지금,<br>변하지 않아야 할 것이 무엇인지 다다름은 알고 있습니다.</p>
+    </div>
+    <div class="meta-cards">
+      <div class="meta-card rv"><div class="meta-no">META COMPETENCY 01</div><div class="meta-name">일터학습 민첩성</div><div class="meta-quote">"빠르게 변하는 상황을 읽고<br>스스로 배움을 조정하는 힘"</div><p class="meta-desc">넘쳐나는 정보 속에서 핵심을 선별하고 사실에 근거해 판단하는 능력. 변화하는 환경에 민첩하게 반응하되 흔들리지 않는 리더의 눈을 키웁니다.</p><div class="meta-icon">⚡</div></div>
+      <div class="meta-card rv"><div class="meta-no">META COMPETENCY 02</div><div class="meta-name">메타인지</div><div class="meta-quote">"내가 무엇을 알고 모르는지 아는 것,<br>그것이 리더 판단력의 시작입니다"</div><p class="meta-desc">자신의 사고 방식과 편향을 인식하고 스스로를 제대로 수용하는 능력. 확신에 찬 겸손함으로 더 나은 의사결정을 이끌어냅니다.</p><div class="meta-icon">🧠</div></div>
+      <div class="meta-card rv"><div class="meta-no">META COMPETENCY 03</div><div class="meta-name">다양성 추구</div><div class="meta-quote">"다름을 틀림으로 보지 않는 것,<br>그것이 팀을 움직이는 힘입니다"</div><p class="meta-desc">다양한 세대와 배경의 구성원을 있는 그대로 이해하고 함께 일하는 능력. 개별성을 존중하는 리더가 AI를 넘어서는 조직의 집단지성을 이끌어냅니다.</p><div class="meta-icon">🌐</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="program">
+  <div class="container">
+    <div class="prog-hd rv">
+      <p class="sec-label">Program</p>
+      <h2 class="sec-title">어떻게 달라지는가 — 과정 구성</h2>
+      <p class="sec-sub">7개 모듈, 2~3일 과정으로 구성됩니다.<br>강의를 듣는 것이 아니라 경험하고 성찰하며 각자의 방식으로 체화합니다.</p>
+    </div>
+    <div class="steps-wrap rv">
+      <div class="step"><div class="step-n">01</div><div><div class="step-tag">INTRO</div><div class="step-title">다르게 생각하기</div><div class="step-desc">리더로서 나의 현재를 점검하고 변화의 시작점을 스스로 설정합니다.</div></div></div>
+      <div class="step"><div class="step-n">02</div><div><div class="step-tag">일터학습 민첩성</div><div class="step-title">객관적 상황파악</div><div class="step-desc">사실에 근거한 판단과 핵심정보 선별. 일터학습 민첩성의 첫 번째 실습입니다.</div></div></div>
+      <div class="step"><div class="step-n">03</div><div><div class="step-tag">메타인지</div><div class="step-title">성과점검</div><div class="step-desc">업무 과정과 결과를 객관적으로 봅니다. 나의 판단을 다시 살펴보는 성찰 훈련입니다.</div></div></div>
+      <div class="step"><div class="step-n">04</div><div><div class="step-tag">디지털 리터러시</div><div class="step-title">디지털 환경 활용</div><div class="step-desc">AI·디지털 도구를 리더의 관점으로 활용하고 비대면 환경에서의 소통 방법을 실습합니다.</div></div></div>
+      <div class="step"><div class="step-n">05</div><div><div class="step-tag">다양성 추구</div><div class="step-title">다양성 이해·존중</div><div class="step-desc">구성원의 다름을 인식하는 것에서 함께 일하는 방식을 설계하는 것으로 나아갑니다.</div></div></div>
+      <div class="step step-outro"><div class="step-n">06</div><div><div class="step-tag">OUTRO</div><div class="step-title">리더의 기록</div><div class="step-desc">현장으로 돌아갔을 때 꺼낼 수 있는 나만의 행동 하나를 만듭니다.</div></div></div>
+    </div>
+    <div class="badges rv">
+      <span class="badge">대면 운영 가능</span><span class="badge">비대면 운영 가능</span>
+      <span class="badge">하이브리드 운영 가능</span><span class="badge">기관별 모듈 커스터마이징</span><span class="badge">기본 과정 2~3일</span>
+    </div>
+  </div>
+</section>
+
+<section id="philosophy">
+  <div class="container">
+    <div class="phil-grid">
+      <div class="rv">
+        <p class="sec-label">Our Approach</p>
+        <h2 class="sec-title">다다름이 교육을<br>설계하는 방식</h2>
+        <p class="phil-lead">다다름은 가르치지 않습니다.<br>스스로 교육 속 경험을 통해 깨닫게 합니다.</p>
+        <div class="phil-steps">
+          <div class="phil-step"><div class="phil-dot-wrap"><div class="phil-dot">1</div></div><div class="phil-body"><div class="phil-lbl">느끼다 — 컨셉화</div><div class="phil-ttl">교육의 필요성에 공감합니다</div><p class="phil-desc">"나에게 왜 필요한 교육인가"를 스스로 확인할 때 학습에 대한 동기가 커집니다.</p></div></div>
+          <div class="phil-step"><div class="phil-dot-wrap"><div class="phil-dot">2</div></div><div class="phil-body"><div class="phil-lbl">생각하다 — 시각화</div><div class="phil-ttl">기존의 나와 새로운 나를 마주합니다</div><p class="phil-desc">다른 사람을 관찰하고 교류하며 관점을 다각화하는 과정입니다.</p></div></div>
+          <div class="phil-step"><div class="phil-dot-wrap"><div class="phil-dot">3</div></div><div class="phil-body"><div class="phil-lbl">행동하다 — 자기화</div><div class="phil-ttl">나만이 가능한 행동을 명확히 합니다</div><p class="phil-desc">현장에서 바로 변화할 수 있는 실질적인 과제들을 만들어갑니다.</p></div></div>
+        </div>
+      </div>
+      <div class="phil-box rv">
+        <div class="phil-quote">평균적인 교육생은 없습니다.<br>모두가 다른 존재이기 때문에<br>다다름의 교육은 각자의 방식으로 체화됩니다.</div>
+        <div class="phil-attr"><div class="phil-line"></div><span>다다름의 교육 철학</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="cta-inner">
+    <p class="sec-label" style="color:var(--cyan);text-align:center;margin-bottom:.6rem">도입 문의</p>
+    <h2 class="cta-title rv">우리 조직의 팀장 리더십,<br>근간부터 다시 설계하고 싶으신가요?</h2>
+    <p class="cta-sub rv">기관과 조직의 상황에 맞춰 함께 설계해드립니다.<br>문의 주시면 담당자가 빠르게 연락드리겠습니다.</p>
+    <button class="btn-gold rv" onclick="openModal()" style="font-size:1rem;padding:1rem 3rem">도입 문의하기 →</button>
+    <p class="cta-info rv">담당자 확인 후 2영업일 이내에 연락드립니다.<br>
+      <a href="mailto:jjj@dadareum.kr">jjj@dadareum.kr</a>&nbsp;|&nbsp;<a href="tel:01063918708">010-6391-8708</a>
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-logo"><img src="data:image/png;base64,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" alt="다다름" /></div>
+  <div class="foot-copy">© 2025 다다름. 학습자를 위한 바른 교육, 다른 교육.</div>
+</footer>
+
+<div class="modal-ov" id="ov" onclick="closeOut(event)">
+  <div class="modal">
+    <button class="modal-x" onclick="closeModal()">✕</button>
+    <div class="modal-title">도입 문의하기</div>
+    <p class="modal-desc">상담을 위해 필요한 정보를 입력해 주세요.<br>담당자가 확인 후 빠른 시일 내에 연락드리겠습니다.</p>
+    <div class="fg"><label>회사명</label><input type="text" placeholder="정확한 회사명을 입력해주세요"/></div>
+    <div class="fg"><label>담당자명</label><input type="text" placeholder="성함을 입력해주세요"/></div>
+    <div class="fg"><label>휴대폰번호</label><input type="tel" placeholder="010-0000-0000"/></div>
+    <button class="btn-submit">신청하기</button>
+  </div>
+</div>
+
+<script>
+  function openModal(){document.getElementById('ov').classList.add('on');document.body.style.overflow='hidden'}
+  function closeModal(){document.getElementById('ov').classList.remove('on');document.body.style.overflow=''}
+  function closeOut(e){if(e.target===document.getElementById('ov'))closeModal()}
+
+  // 스크롤 애니메이션
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('on'), i * 80);
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+  // 네비게이션 활성
+  const secs = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    secs.forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--cyan)' : '';
+    });
+  });
+</script>
+</body>
+</html>
