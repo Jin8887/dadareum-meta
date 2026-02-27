@@ -379,17 +379,35 @@
     <button class="modal-x" onclick="closeModal()">✕</button>
     <div class="modal-title">도입 문의하기</div>
     <p class="modal-desc">상담을 위해 필요한 정보를 입력해 주세요.<br>담당자가 확인 후 빠른 시일 내에 연락드리겠습니다.</p>
-    <div class="fg"><label>회사명</label><input type="text" placeholder="정확한 회사명을 입력해주세요"/></div>
-    <div class="fg"><label>담당자명</label><input type="text" placeholder="성함을 입력해주세요"/></div>
-    <div class="fg"><label>이메일 주소</label><input type="email" placeholder="example@company.com"/></div>
-    <button class="btn-submit">신청하기</button>
+    <form id="contact-form" action="https://formspree.io/f/xvzbyoee" method="POST" onsubmit="handleSubmit(event)">
+      <div class="fg"><label>회사명</label><input type="text" name="company" placeholder="정확한 회사명을 입력해주세요" required/></div>
+      <div class="fg"><label>담당자명</label><input type="text" name="name" placeholder="성함을 입력해주세요" required/></div>
+      <div class="fg"><label>이메일 주소</label><input type="email" name="email" placeholder="example@company.com" required/></div>
+      <button type="submit" class="btn-submit" id="submit-btn">신청하기</button>
+    </form>
   </div>
 </div>
 
 <script>
   function openModal(){document.getElementById('ov').classList.add('on');document.body.style.overflow='hidden'}
-  function closeModal(){document.getElementById('ov').classList.remove('on');document.body.style.overflow=''}
+  function closeModal(){document.getElementById('ov').classList.remove('on');document.body.style.overflow='';var f=document.getElementById('contact-form');if(f)f.reset();}
   function closeOut(e){if(e.target===document.getElementById('ov'))closeModal()}
+  async function handleSubmit(e){
+    e.preventDefault();
+    var btn=document.getElementById('submit-btn');
+    btn.textContent='전송 중...';btn.disabled=true;
+    try{
+      var res=await fetch('https://formspree.io/f/xvzbyoee',{method:'POST',body:new FormData(e.target),headers:{'Accept':'application/json'}});
+      if(res.ok){
+        btn.textContent='전송 완료!';btn.style.background='#2a9d5c';
+        setTimeout(()=>{closeModal();btn.textContent='신청하기';btn.style.background='';btn.disabled=false;},1800);
+      } else {
+        btn.textContent='오류가 발생했습니다. 다시 시도해주세요.';btn.disabled=false;
+      }
+    } catch(err){
+      btn.textContent='오류가 발생했습니다. 다시 시도해주세요.';btn.disabled=false;
+    }
+  }
   const obs=new IntersectionObserver((entries)=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('on'),i*80);obs.unobserve(e.target)}})},{threshold:0.08});
   document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
   const secs=document.querySelectorAll('section[id]');
