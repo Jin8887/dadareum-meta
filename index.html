@@ -24,7 +24,8 @@
       background:rgba(13,31,60,.97);backdrop-filter:blur(8px);
       border-bottom:1px solid rgba(0,194,209,.12);
     }
-    .nav-logo img{height:36px;width:auto;display:block}
+    .nav-logo{text-decoration:none;display:inline-block}
+    .nav-logo-text{font-family:var(--font);font-size:1.2rem;font-weight:800;color:var(--gold);letter-spacing:.04em}
     .nav-links{display:flex;gap:2.4rem;list-style:none}
     .nav-links a{font-family:var(--font);color:rgba(255,255,255,.65);text-decoration:none;font-size:.85rem;font-weight:500;transition:color .2s}
     .nav-links a:hover{color:var(--cyan)}
@@ -222,7 +223,7 @@
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="https://www.dadareum.kr/"><img src="data:image/png;base64,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" alt="다다름"/></a>
+  <a class="nav-logo" href="https://www.dadareum.kr/"><span class="nav-logo-text">다다름</span></a>
   <ul class="nav-links">
     <li><a href="#why">문제 제기</a></li>
     <li><a href="#meta">메타역량</a></li>
@@ -361,7 +362,7 @@
     <p class="cta-sub rv">기관과 조직의 상황에 맞춰 함께 설계해드립니다.<br>문의 주시면 담당자가 빠르게 연락드리겠습니다.</p>
     <button class="btn-gold rv" onclick="openModal()" style="font-size:1rem;padding:1.1rem 3.2rem">도입 문의하기 →</button>
     <p class="cta-info rv">담당자 확인 후 2영업일 이내에 연락드립니다.<br>
-      <a href="mailto:jjj@dadareum.kr">jjj@dadareum.kr</a>&nbsp;|&nbsp;<a href="tel:01063918708">010-6391-8708</a>
+      <a href="/cdn-cgi/l/email-protection#355f5f5f7551545154475040581b5e47"><span class="__cf_email__" data-cfemail="3c5656567c585d585d4e59495112574e">[email&#160;protected]</span></a>&nbsp;|&nbsp;<a href="tel:01063918708">010-6391-8708</a>
     </p>
   </div>
 </section>
@@ -388,7 +389,7 @@
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   function openModal(){document.getElementById('ov').classList.add('on');document.body.style.overflow='hidden'}
   function closeModal(){document.getElementById('ov').classList.remove('on');document.body.style.overflow='';var f=document.getElementById('contact-form');if(f)f.reset();}
   function closeOut(e){if(e.target===document.getElementById('ov'))closeModal()}
@@ -411,7 +412,4 @@
   const obs=new IntersectionObserver((entries)=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('on'),i*80);obs.unobserve(e.target)}})},{threshold:0.08});
   document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
   const secs=document.querySelectorAll('section[id]');
-  window.addEventListener('scroll',()=>{let cur='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)cur=s.id});document.querySelectorAll('.nav-links a').forEach(a=>{a.style.color=a.getAttribute('href')==='#'+cur?'var(--cyan)':''})});
-</script>
-</body>
-</html>
+  window.addEventListener('
