@@ -107,7 +107,8 @@
     /* ── WHY ── */
     #why{background:var(--gray-bg)}
     .why-hd{margin-bottom:3rem}
-    .why-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-bottom:2.2rem}
+    .why-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem;margin-bottom:2.2rem}
+    .why-cards .why-card:last-child{grid-column:1 / -1;width:100%;text-align:center}
     .why-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:2rem;position:relative;overflow:hidden;transition:box-shadow .3s,transform .3s}
     .why-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(13,31,60,.09)}
     .why-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--cyan))}
@@ -125,7 +126,8 @@
     .meta-hd{text-align:center;margin-bottom:3.6rem}
     .meta-hd .sec-title{color:var(--white)}
     .meta-intro{font-family:var(--font);font-size:1rem;color:rgba(255,255,255,.55);line-height:1.9;max-width:620px;margin:1.2rem auto 0;text-align:center}
-    .meta-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+    .meta-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem}
+    .meta-cards .meta-card:last-child{grid-column:1 / -1;max-width:calc(50% - 0.7rem);margin:0 auto}
     .meta-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:2.4rem;transition:all .3s;position:relative;overflow:hidden}
     .meta-card:hover{background:rgba(255,255,255,.07);border-color:rgba(0,194,209,.3);transform:translateY(-4px)}
     .meta-no{font-family:var(--font);font-size:.7rem;font-weight:700;letter-spacing:.14em;color:var(--cyan);margin-bottom:.8rem}
@@ -208,12 +210,14 @@
     @media(max-width:1024px){
       #hero{grid-template-columns:1fr;padding:100px 5% 60px}
       .hero-right{display:none}
-      .why-cards,.meta-cards{grid-template-columns:repeat(2,1fr)}
+      .why-cards .why-card:last-child{max-width:100%}
+      .meta-cards .meta-card:last-child{max-width:100%}
       .phil-grid{grid-template-columns:1fr;gap:3rem}
     }
     @media(max-width:680px){
       section{padding:72px 5%}
       .why-cards,.meta-cards{grid-template-columns:1fr}
+      .why-cards .why-card:last-child,.meta-cards .meta-card:last-child{grid-column:auto;max-width:100%;margin:0}
       .steps-wrap{grid-template-columns:1fr}
       .nav-links{display:none}
     }
@@ -312,7 +316,7 @@
     <div class="prog-hd rv">
       <p class="sec-label">Program</p>
       <h2 class="sec-title">어떻게 달라지는가 — 과정 구성</h2>
-      <p class="sec-sub">7개 모듈, 2~3일 과정으로 구성됩니다.<br>강의를 듣는 것이 아니라 경험하고 성찰하며 각자의 방식으로 체화합니다.</p>
+      <p class="sec-sub">6개 모듈, 2~3일 과정으로 구성됩니다.<br>강의를 듣는 것이 아니라 경험하고 성찰하며 각자의 방식으로 체화합니다.</p>
     </div>
     <div class="steps-wrap rv">
       <div class="step"><div class="step-n">01</div><div><div class="step-tag">INTRO</div><div class="step-title">다르게 생각하기</div><div class="step-desc">리더로서 나의 현재를 점검하고 변화의 시작점을 스스로 설정합니다.</div></div></div>
@@ -412,4 +416,15 @@
   const obs=new IntersectionObserver((entries)=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('on'),i*80);obs.unobserve(e.target)}})},{threshold:0.08});
   document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
   const secs=document.querySelectorAll('section[id]');
-  window.addEventListener('
+  window.addEventListener('scroll',()=>{
+    let cur='';
+    secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)cur=s.id});
+    document.querySelectorAll('.nav-links a').forEach(a=>{
+      const href=a.getAttribute('href');
+      if(href==='#'+cur){a.style.color='var(--cyan)'}
+      else if(!a.classList.contains('nav-cta')){a.style.color=''}
+    });
+  });
+</script>
+</body>
+</html>
